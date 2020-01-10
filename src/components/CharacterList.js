@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CharacterCard from "./CharacterCard";
 import SearchForm from "./SearchForm";
+import SearchTag from "./SearchTag";
 
 export default function CharacterList() {
   const [characters, setCharacters] = useState([]);
@@ -32,6 +33,7 @@ export default function CharacterList() {
 
   return (
     <div>
+      <SearchTag />
       <SearchForm handleInputChange={handleInputChange} query={query} />
       <div className="caracter-card-wrapper">
         {characters.map(character => (

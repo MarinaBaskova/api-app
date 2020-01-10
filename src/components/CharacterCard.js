@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import TagForm from "./TagForm";
 
 export default function CharacterCard(props) {
-  const [toggle, settoggle] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [tags, setTags] = useState([]);
 
   const handleToggle = () => {
-    settoggle(!toggle);
+    setToggle(!toggle);
+  };
+
+  const addTag = (event, tag) => {
+    event.preventDefault();
+    setTags([...tags, tag]);
   };
 
   const sum = props.grades.reduce(function(accumulator, currentValue) {
@@ -25,16 +32,19 @@ export default function CharacterCard(props) {
   return (
     <div className="character-card">
       {toggle ? (
-        <button onClick={handleToggle}>-</button>
+        <button className="expand-btn" onClick={handleToggle}>
+          -
+        </button>
       ) : (
-        <button onClick={handleToggle}>+</button>
+        <button className="expand-btn" onClick={handleToggle}>
+          +
+        </button>
       )}
-
       <div className="character-image-wrapper">
         <img
           className="character-image"
           src={props.pic}
-          alt="character image"
+          alt="character avatar"
         />
       </div>
       <div className="character-content-wrapper">
@@ -50,6 +60,8 @@ export default function CharacterCard(props) {
         {toggle && (
           <div className="extra-content">
             <div>{testList}</div>
+            {tags && tags.map((tag, index) => <div key={index}>{tag}</div>)}
+            <TagForm addTag={addTag} />
           </div>
         )}
       </div>
