@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function CharacterCard(props) {
+  const [toggle, settoggle] = useState(false);
+
+  const handleToggle = () => {
+    settoggle(!toggle);
+  };
+
   const sum = props.grades.reduce(function(accumulator, currentValue) {
     let num = parseInt(currentValue, 10);
     return accumulator + num;
@@ -18,6 +24,12 @@ export default function CharacterCard(props) {
 
   return (
     <div className="character-card">
+      {toggle ? (
+        <button onClick={handleToggle}>-</button>
+      ) : (
+        <button onClick={handleToggle}>+</button>
+      )}
+
       <div className="character-image-wrapper">
         <img
           className="character-image"
@@ -35,9 +47,11 @@ export default function CharacterCard(props) {
           <p>Skill: {props.skill}</p>
           <p>Average: {averageGrade}%</p>
         </div>
-        <div className="extra-content">
-          <div>{testList}</div>
-        </div>
+        {toggle && (
+          <div className="extra-content">
+            <div>{testList}</div>
+          </div>
+        )}
       </div>
     </div>
   );
