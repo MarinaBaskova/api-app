@@ -21,6 +21,7 @@ export default function TagForm(props) {
           name="inputVal"
           onChange={handleChanges}
           placeholder="Add Tag"
+          className="add-tag-input"
         />
       </form>
     </div>
