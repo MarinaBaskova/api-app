@@ -22,9 +22,12 @@ export default function CharacterList() {
             character.lastName.toLowerCase().includes(query.toLowerCase())
           );
         });
+        //add tags array for each character
+        for (let i = 0; i < data.length; i++) {
+          data[i].tags = [];
+        }
+        console.log("HERE", data);
         setCharacters(data);
-
-        console.log(data);
       })
       .catch(err => {
         console.log("The data was not returned", err);
