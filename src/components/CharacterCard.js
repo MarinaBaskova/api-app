@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TagForm from "./TagForm";
 
 export default function CharacterCard(props) {
+  // console.log("CHARACTER CARD", props);
   const [toggle, setToggle] = useState(false);
   // const [tags, setTags] = useState([]);
 
@@ -28,7 +29,7 @@ export default function CharacterCard(props) {
       </p>
     );
   }
-
+  console.log("CARDS");
   return (
     <div className="character-card">
       {toggle ? (
@@ -61,8 +62,9 @@ export default function CharacterCard(props) {
           <div className="extra-content">
             <div>{testList}</div>
             {/* add tags from state of characters */}
-            {/* {tags && tags.map((tag, index) => <div key={index}>{tag}</div>)} */}
-            <TagForm addTag={props.addTag} id={props.id} />
+            {props.tags &&
+              props.tags.map((tag, index) => <div key={index}>{tag}</div>)}
+            <TagForm addTag={props.addTag} id={props.id} index={props.index} />
           </div>
         )}
       </div>

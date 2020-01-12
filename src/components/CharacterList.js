@@ -12,13 +12,15 @@ export default function CharacterList() {
     setQuery(event.target.value);
   };
 
-  const addTag = (event, tag, id) => {
-    console.log(tag, id);
+  const addTag = (event, tag, id, index) => {
     event.preventDefault();
     // console.log("ADD TO TAG", tag);
     // console.log("ADD TO", characters[id - 1].tags.push(tag));
-    setCharacters([...characters, characters[id - 1].tags.push(tag)]);
-    console.log("AFTER ADD TAG", characters);
+
+    console.log("ID/INDEX TO ADD TAG FOR", id, index);
+    characters[index].tags.push(tag);
+    setCharacters(characters);
+    console.log("AFTER ADDED TAG", characters);
   };
 
   useEffect(() => {
@@ -35,23 +37,27 @@ export default function CharacterList() {
         for (let i = 0; i < data.length; i++) {
           data[i].tags = [];
         }
-        console.log("HERE", data);
+
+        console.log("->>> DATA FROM API ", data);
         setCharacters(data);
+        console.log("=====>", characters);
       })
       .catch(err => {
         console.log("The data was not returned", err);
       });
   }, [query]);
 
+  console.log("LIST TO RENDER", characters);
   return (
     <div>
       <SearchTag />
       <SearchForm handleInputChange={handleInputChange} query={query} />
       <div className="caracter-card-wrapper">
-        {characters.map(character => (
+        {characters.map((character, index) => (
           <CharacterCard
             key={character.id}
             id={character.id}
+            index={index}
             firstname={character.firstName}
             lastname={character.lastName}
             email={character.email}
@@ -59,6 +65,7 @@ export default function CharacterList() {
             skill={character.skill}
             grades={character.grades}
             pic={character.pic}
+            tags={character.tags}
             addTag={addTag}
           />
         ))}
