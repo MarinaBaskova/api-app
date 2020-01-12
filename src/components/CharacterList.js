@@ -12,6 +12,15 @@ export default function CharacterList() {
     setQuery(event.target.value);
   };
 
+  const addTag = (event, tag, id) => {
+    console.log(tag, id);
+    event.preventDefault();
+    // console.log("ADD TO TAG", tag);
+    // console.log("ADD TO", characters[id - 1].tags.push(tag));
+    setCharacters([...characters, characters[id - 1].tags.push(tag)]);
+    console.log("AFTER ADD TAG", characters);
+  };
+
   useEffect(() => {
     axios
       .get("https://www.hatchways.io/api/assessment/students")
@@ -42,6 +51,7 @@ export default function CharacterList() {
         {characters.map(character => (
           <CharacterCard
             key={character.id}
+            id={character.id}
             firstname={character.firstName}
             lastname={character.lastName}
             email={character.email}
@@ -49,6 +59,7 @@ export default function CharacterList() {
             skill={character.skill}
             grades={character.grades}
             pic={character.pic}
+            addTag={addTag}
           />
         ))}
       </div>
