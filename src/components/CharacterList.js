@@ -33,11 +33,9 @@ export default function CharacterList() {
             character.lastName.toLowerCase().includes(query.toLowerCase())
           );
         });
-        //add tags array for each character
         for (let i = 0; i < data.length; i++) {
           data[i].tags = [];
         }
-        console.log("STATE RERENDER API");
         setCharacters(data);
       })
       .catch(err => {
@@ -45,7 +43,6 @@ export default function CharacterList() {
       });
   }, [query]);
 
-  console.log("LIST TO RENDER", characters);
   return (
     <div>
       <SearchTag />

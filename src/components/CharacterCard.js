@@ -22,7 +22,7 @@ export default function CharacterCard(props) {
       </p>
     );
   }
-  console.log("CARDS");
+
   return (
     <div className="character-card">
       {toggle ? (
