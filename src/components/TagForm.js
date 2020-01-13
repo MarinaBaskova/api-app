@@ -10,7 +10,7 @@ export default function TagForm(props) {
   const submitTag = event => {
     event.preventDefault();
     setInputVal("");
-    props.addTag(event, inputVal, props.id, props.index);
+    props.addTag(event, inputVal, props.index);
   };
 
   return (
@@ -23,6 +23,7 @@ export default function TagForm(props) {
           onChange={handleChanges}
           placeholder="Add Tag"
           className="add-tag-input"
+          required
         />
       </form>
     </div>

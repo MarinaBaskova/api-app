@@ -12,15 +12,15 @@ export default function CharacterList() {
     setQuery(event.target.value);
   };
 
-  const addTag = (event, tag, id, index) => {
+  const addTag = (event, tag, index) => {
     event.preventDefault();
-    // console.log("ADD TO TAG", tag);
-    // console.log("ADD TO", characters[id - 1].tags.push(tag));
-
-    console.log("ID/INDEX TO ADD TAG FOR", id, index);
-    characters[index].tags.push(tag);
-    setCharacters(characters);
-    console.log("AFTER ADDED TAG", characters);
+    let tagsCopy = [...characters[index].tags];
+    let objCopy = Object.assign({}, characters[index]);
+    objCopy.tags = tagsCopy;
+    objCopy.tags.push(tag);
+    let charactersCopy = [...characters];
+    charactersCopy[index] = objCopy;
+    setCharacters(charactersCopy);
   };
 
   useEffect(() => {
@@ -37,10 +37,8 @@ export default function CharacterList() {
         for (let i = 0; i < data.length; i++) {
           data[i].tags = [];
         }
-
-        console.log("->>> DATA FROM API ", data);
+        console.log("STATE RERENDER API");
         setCharacters(data);
-        console.log("=====>", characters);
       })
       .catch(err => {
         console.log("The data was not returned", err);
@@ -56,7 +54,6 @@ export default function CharacterList() {
         {characters.map((character, index) => (
           <CharacterCard
             key={character.id}
-            id={character.id}
             index={index}
             firstname={character.firstName}
             lastname={character.lastName}
