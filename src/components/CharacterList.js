@@ -28,7 +28,6 @@ export default function CharacterList() {
     setCharacters(charactersCopy);
 
     // let foundChar = { ...characters[index] };
-    // console.log(foundChar);
     // foundChar.tags = [...foundChar.tags, tag];
     // let updatedChar = [...characters];
     // updatedChar[index] = foundChar;
@@ -40,12 +39,6 @@ export default function CharacterList() {
       .get("https://www.hatchways.io/api/assessment/students")
       .then(res => {
         const data = res.data.students;
-        // .filter(character => {
-        // return (
-        //   character.firstName.toLowerCase().includes(query.toLowerCase()) ||
-        //   character.lastName.toLowerCase().includes(query.toLowerCase())
-        // );
-        // });
         for (let i = 0; i < data.length; i++) {
           data[i].tags = [];
         }
@@ -76,7 +69,6 @@ export default function CharacterList() {
         return searchFirstName || searchLastName || formatedTag;
       });
       results = serchedResults;
-      console.log("serchedResults =", serchedResults);
     } else {
       results = characters;
     }

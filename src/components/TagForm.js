@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 export default function TagForm(props) {
-  //   console.log("TAG FORM ID", props);
   const [inputVal, setInputVal] = useState("");
 
   const handleChanges = event => {
