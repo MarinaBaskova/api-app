@@ -7,8 +7,8 @@ export default function SearchTag(props) {
         <input
           id="tag-input"
           type="text"
-          //   onChange={props}
-          //   value={props}
+          onChange={props.handleTagChange}
+          value={props.searchTag}
           name="text-input"
           placeholder="search by tags"
         />
