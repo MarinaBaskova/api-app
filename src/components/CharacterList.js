@@ -48,25 +48,28 @@ export default function CharacterList() {
         console.log("The data was not returned", err);
       });
   }, []);
-
   function renderCharacters() {
     let results;
     if (searchName || searchTag) {
       const serchedResults = characters.filter(character => {
-        let formatedTags = [];
-        if (searchTag) {
-          formatedTags = character.tags.filter(tag =>
-            tag.includes(searchTag.toLowerCase())
-          );
-        }
         const searchFirstName = searchName
           ? character.firstName.toLowerCase().includes(searchName.toLowerCase())
           : false;
         const searchLastName = searchName
           ? character.lastName.toLowerCase().includes(searchName.toLowerCase())
           : false;
-        const formatedTag = formatedTags.length ? true : false;
-        return searchFirstName || searchLastName || formatedTag;
+        let tagsFlag = false;
+        if (searchTag) {
+          for (let i = 0; i < character.tags.length; i++) {
+            if (
+              character.tags[i].toLowerCase().includes(searchTag.toLowerCase())
+            ) {
+              tagsFlag = true;
+              break;
+            }
+          }
+        }
+        return searchFirstName || searchLastName || tagsFlag;
       });
       results = serchedResults;
     } else {
